@@ -1,0 +1,105 @@
+/* 棋盘样式 */
+
+/* 定义棋格大小 */
+:root{
+	--board-cell-width: 100;/*格子的理想高度 不需要带单位*/
+	--board-cell-heigh: calc(1px*var(--board-cell-width)*1.25);
+}
+
+
+
+body, div, img, ul, li {
+	margin : 0 ;
+	padding : 0 ;
+}
+body {
+	font-size : 12px ;
+	background-color : #DDD ;
+	/* min-width : 1200px ; */
+}
+ul, ul li {
+	list-style : none ;
+}
+.clear {
+	clear : both ;
+}
+.box {
+	position : relative ;
+	/* width : 630px ; */
+	margin : auto auto ;
+}
+.lineF, .lineS, .lineT {
+	position : absolute ;
+	visibility : hidden ;
+}
+.lineS {
+	/* top : 182px ; */
+	top : calc(0.91px*var(--board-cell-width));
+
+	/* top : calc(1.73205/(2*var(--board-cell-width))+0.5*var(--board-cell-width)); */
+	left: calc(1px*var(--board-cell-width)*21/40);
+}
+.lineT {
+	top : calc(2*0.91px*var(--board-cell-width));
+}
+.boxF, .boxS, .boxT, .overlay {
+	width : calc(1px*var(--board-cell-width));
+	height : var(--board-cell-heigh);
+	overflow : hidden ;
+}
+.boxF, .boxS {
+	visibility : hidden ;
+}
+.boxF {
+	transform : rotate(120deg) ;
+	float : left ;
+	margin-left : calc(1px*var(--board-cell-width)/20) ;
+	-ms-transform : rotate(120deg) ;
+	-moz-transform : rotate(120deg) ;
+	-webkit-transform : rotate(120deg) ;
+}
+.boxS {
+	transform : rotate(-60deg) ;
+	-ms-transform : rotate(-60deg) ;
+	-moz-transform : rotate(-60deg) ;
+	-webkit-transform : rotate(-60deg) ;
+}
+.boxT {
+	transform : rotate(-60deg) ;
+	background : no-repeat 50% center ;
+	background-size : 125% auto ;
+	-ms-transform : rotate(-60deg) ;
+	-moz-transform : rotate(-60deg) ;
+	-webkit-transform : rotate(-60deg) ;
+	visibility : visible ;
+	background-color: #fff;
+}
+.overlay {
+	transition : all 250ms ease-in-out 0s ;
+	display : none ;
+	position : relative ;
+}
+.overlay:hover {
+	background-color : rgba(0,0,0,0.6) ;
+}
+.boxT:hover .overlay {
+	display : block ;
+}
+.overlay a {
+	display : inline-block ;
+	position : absolute ;
+	left : 50% ;
+	top : 50% ;
+	margin : -16px 0 0 -16px ;
+	border-radius : 3px ;
+	background-color : #d3b850 ;
+	text-align : center ;
+	line-height : 32px ;
+	width : 32px ;
+	height : 32px ;
+	text-decoration : none ;
+	color : White ;
+	font-size : 18px ;
+	font-weight : bolder ;
+	transform: scale(calc(var(--board-cell-width)/200));
+}
