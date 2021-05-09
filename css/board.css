@@ -79,6 +79,10 @@ ul, ul li {
 	visibility : visible ;
 	background-color: #fff;
 }
+
+.boxPlayer{
+	background-color: darkorange !important;
+}
 .overlay {
 	transition : all 250ms ease-in-out 0s ;
 	display : none ;
