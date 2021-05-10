@@ -1,0 +1,44 @@
+/* 右键菜单 */
+
+.button{
+	width:200px;
+	height:50px;
+	background:grey;
+	text-align:center;
+	line-height:50px;
+	margin:0 auto;
+	margin-top:50px;
+}
+.menu{
+	padding: 1px;
+	border: 1px solid #B8CBCB;
+	background-color: #fff;
+	-moz-box-shadow: 2px 2px 5px #666;
+	-webkit-box-shadow: 2px 2px 5px #666;
+	box-shadow: 2px 2px 5px #666;
+	width:140px;
+	position:absolute;
+	display:none;
+}
+ul li{
+	list-style:none;
+}
+.li_separate{
+	line-height: 0;
+	margin: 3px;
+	border-bottom: 1px solid #B8CBCB;
+	font-size: 0;
+}
+.menu_a{
+	display: block;
+	height: 25px;
+	line-height: 24px;
+	padding: 0 5px 0 25px;
+	color: #000;
+	font-size: 12px;
+	text-decoration: none;
+}
+.menu_a:hover{
+	background: #348CCC;
+	color:white;
+}

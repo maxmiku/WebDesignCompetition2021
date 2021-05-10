@@ -1,0 +1,24 @@
+.line {
+	/* position : absolute ; */
+	visibility : hidden ;
+	/* margin-top: calc(-0.4px*var(--board-cell-heigh)); */
+}
+.lineS {
+	/* top : 182px ; */
+	top : calc(0.91px*var(--board-cell-heigh));
+
+	/* top : calc(1.73205/(2*var(--board-cell-heigh))+0.5*var(--board-cell-heigh)); */
+	left: calc(1px*var(--board-cell-heigh)*21/40);
+}
+.lineT {
+	top : calc(2*0.91px*var(--board-cell-heigh));
+	left: calc(0px*var(--board-cell-heigh)*21/40);
+}
+.line4 {
+	top : calc(3*0.91px*var(--board-cell-heigh));
+	left: calc(1px*var(--board-cell-heigh)*21/40);
+}
+.line5 {
+	top : calc(4*0.91px*var(--board-cell-heigh));
+	left: calc(0px*var(--board-cell-heigh)*21/40);
+}
