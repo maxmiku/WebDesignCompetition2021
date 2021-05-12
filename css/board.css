@@ -5,7 +5,7 @@
 	--board-cell-heigh: 100;/*格子的理想高度 不需要带单位*/
 	--board-cell-width: calc(1px*var(--board-cell-heigh)*1.25);
 	--board-cell-border-width: calc(2px*var(--board-cell-heigh)/40);
-	--board-cell-border-color: orange;
+	--board-cell-border-color: blue;
 }
 
 
@@ -61,7 +61,7 @@ ul, ul li {
 .boxF, .boxS, .boxT, .overlay, .boxSBorder,  .boxFBorder{
 	width : calc(1px*var(--board-cell-heigh));
 	height : var(--board-cell-width);
-	overflow : hidden ;
+	
 }
 .boxF, .boxS {
 	visibility : hidden;
@@ -74,13 +74,14 @@ ul, ul li {
 	-ms-transform : rotate(120deg) ;
 	-moz-transform : rotate(120deg) ;
 	-webkit-transform : rotate(120deg) ;
+	overflow : hidden ;
 }
 .boxS {
 	transform : rotate(-60deg) ;
 	-ms-transform : rotate(-60deg) ;
 	-moz-transform : rotate(-60deg) ;
 	-webkit-transform : rotate(-60deg) ;
-
+	overflow : hidden ;
 	
 }
 
@@ -116,12 +117,10 @@ ul, ul li {
 	/* margin-right: -1px; */
 	border-width:0 var(--board-cell-border-width) 0 var(--board-cell-border-width);
 	border-style: solid;
-	/* border-color: blue; */
 	visibility : visible ;
 	border-color: transparent;
 	pointer-events:none;
 	/* overflow : hidden ; */
-	position: relative;
 }
 
 .boxTBorder{
@@ -167,7 +166,7 @@ ul, ul li {
 	transition: 0.5s;
 
 	position: relative;
-	
+	overflow : hidden ;
 	
 }
 

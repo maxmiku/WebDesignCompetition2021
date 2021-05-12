@@ -16,6 +16,18 @@ document.onkeydown = onDocKeydown;
 
 let menuSelectedPot=null;
 
+
+
+var Direct = {
+    rightTop : 0,
+    right : 1,
+    rightBottom : 2,
+    leftBottom : 3,
+    left : 4,
+    leftTop : 5
+};
+
+
 // 获取指定盒子的位置
 /*
 定位规则
@@ -75,6 +87,13 @@ function initBoard(){
 	
 	setEnemy(-2,4);
 	setMountain(0,-1);
+
+	setUserObstacle([0,0],[1,0]);
+	setUserObstacle([0,0],[1,1]);
+	setUserObstacle([0,0],[0,1]);
+	setUserObstacle([0,0],[-1,0]);
+	setUserObstacle([0,0],[-1,-1]);
+	setUserObstacle([0,0],[0,-1]);
 	// setEnemy(0,2);
 	// setEnemy(0,-1);
 	// setEnemy(0,-2);
@@ -86,7 +105,7 @@ function initBoard(){
 // 制作一行的单元格元素并返回
 function makeLine(len,y,xOffset){
 	lineTemplate='<div class="line"></div>';
-	cellTemplate='<div class="boxF"><div class="boxS"><div data-boardPot="#boardPot#" class="boxT"><div class="overlay"><a>#text#</a></div></div></div></div>';
+	cellTemplate='<div class="boxF"><div class="boxS"><div data-boardPot="#boardPot#" class="boxT"><div class="overlay"><a>#text#</a></div><div class="boxTBorder"><div class="boxSBorder"><div class="boxFBorder"></div></div></div></div></div></div>';
 	let line = $(lineTemplate);
 
 	
@@ -105,7 +124,7 @@ function bondageBoxEvent() {
 		tpot=getPotFromCell(e.currentTarget);
 		console.log('Player Move',spot,'->',tpot)
 
-		if(!checkPlayerMove(spot,tpot)){
+		if(!isCellNearby(spot,tpot)){
 			console.log("越权操作,每次只能移动一步")
 			return;
 		}
@@ -149,10 +168,10 @@ function bondageBoxEvent() {
 	})
 }
 
-// 检测玩家移动是否合法
-function checkPlayerMove(spot,tpot){
-	dx=tpot[0]-spot[0];
-	dy=tpot[1]-spot[1];
+// 检测两个格子是否相邻
+function isCellNearby(spot,tpot){
+	let dx=tpot[0]-spot[0];
+	let dy=tpot[1]-spot[1];
 	if(dx*dy==0){
 		if(Math.abs(dx)==1){
 			return true;
@@ -198,6 +217,84 @@ function setMountain(x,y){
 	getCell(x,y).addClass('boxMountain');
 }
 
+
+
+//设置用户手动设置的障碍
+//传入两个格的位置,自动将之间的边设为障碍
+function setUserObstacle(pot1,pot2){
+	
+	if(!isCellNearby(pot1,pot2)){
+		console.log("Error","两个格子不相邻","setUserObstacle",pot1,pot2);
+		return;
+	}
+	let dx=pot2[0]-pot1[0];
+	let dy=pot2[1]-pot1[1];
+	switch(dy){
+		case 1:
+			switch(dx){
+				case 1:
+					boxObstacle(pot1,Direct.rightTop,true);
+					boxObstacle(pot2,Direct.leftBottom,true);
+					break;
+				case 0:
+					boxObstacle(pot1,Direct.leftTop,true);
+					boxObstacle(pot2,Direct.rightBottom,true);
+					break;
+			}
+			break;
+		case 0:
+			switch(dx){
+				case 1:
+					boxObstacle(pot1,Direct.right,true);
+					boxObstacle(pot2,Direct.left,true);
+					break;
+				case -1:
+					boxObstacle(pot1,Direct.left,true);
+					boxObstacle(pot2,Direct.right,true);
+					break;
+			}
+			break;
+		case -1:
+			switch(dx){
+				case 0:
+					boxObstacle(pot1,Direct.rightBottom,true);
+					boxObstacle(pot2,Direct.leftTop,true);
+					break;
+				case -1:
+					boxObstacle(pot1,Direct.leftBottom,true);
+					boxObstacle(pot2,Direct.rightTop,true);
+					break;
+			}
+			break;
+
+	}
+
+}
+
+//绘制指定位置的障碍 
+//direct传入 Direct
+function boxObstacle(pot,direct,enable){
+	let cell=getCell(pot[0],pot[1]);
+	if(enable){
+		switch(direct){
+			case Direct.rightTop:cell.addClass("RTBorder");break;
+			case Direct.right:cell.addClass("RBorder");break;
+			case Direct.rightBottom:cell.addClass("RBBorder");break;
+			case Direct.leftBottom:cell.addClass("LBBorder");break;
+			case Direct.left:cell.addClass("LBorder");break;
+			case Direct.leftTop:cell.addClass("LTBorder");break;
+		}
+	}else{
+		switch(direct){
+			case Direct.rightTop:cell.removeClass("RTBorder");break;
+			case Direct.right:cell.removeClass("RBorder");break;
+			case Direct.rightBottom:cell.removeClass("RBBorder");break;
+			case Direct.leftBottom:cell.removeClass("LBBorder");break;
+			case Direct.left:cell.removeClass("LBorder");break;
+			case Direct.leftTop:cell.removeClass("LTBorder");break;
+		}
+	}
+}
 
 
 //计算敌人的移动
@@ -261,6 +358,7 @@ function findNearestWay(spot,tpot){
 	return nextPot;
 }
 
+//显示敌人前进路线
 function displayEnemyRoute(spot,tpot){
 	let count = 1;
 	let nextPot=displayEnemyRoute_next(spot,tpot,count);
@@ -298,6 +396,12 @@ function callback_setEnemyButton(){
 function callback_setGoalButton(){
 	console.log('手动设置终点',menuSelectedPot)
 	setGoal(menuSelectedPot[0],menuSelectedPot[1]);
+}
+
+// 右键菜单设置雪山callback
+function callback_setMountainButton(){
+	console.log('手动设置雪山',menuSelectedPot)
+	setMountain(menuSelectedPot[0],menuSelectedPot[1]);
 }
 
 // 右键菜单重置棋盘callback
