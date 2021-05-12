@@ -113,6 +113,14 @@ function bondageBoxEvent() {
 
 
 		movePlayer(tpot[0],tpot[1]);
+		if($(e.currentTarget).hasClass('boxGoal')){
+			$(e.currentTarget).removeClass('boxGoal');
+			setTimeout(function(){
+				alert("你赢了");
+			},400);
+			
+			return;
+		}
 
 
 		calcEnemiesMove();
@@ -177,6 +185,10 @@ function getPotFromCell(cell){
 //设置敌人
 function setEnemy(x,y){
 	getCell(x,y).addClass('boxEnemy');
+}
+
+function setGoal(x,y){
+	getCell(x,y).addClass('boxGoal');
 }
 
 
@@ -244,6 +256,12 @@ function findNearestWay(spot,tpot){
 function callback_setEnemyButton(){
 	console.log('手动设置敌人',menuSelectedPot)
 	setEnemy(menuSelectedPot[0],menuSelectedPot[1]);
+}
+
+// 右键菜单设置终点callback
+function callback_setGoalButton(){
+	console.log('手动设置终点',menuSelectedPot)
+	setGoal(menuSelectedPot[0],menuSelectedPot[1]);
 }
 
 // 右键菜单重置棋盘callback

@@ -96,6 +96,10 @@ ul, ul li {
 	background-color: darkgreen !important;
 }
 
+.boxGoal{
+	background-color: darkblue !important;
+}
+
 .overlay {
 	transition : all 250ms ease-in-out 0s ;
 	display : none ;
