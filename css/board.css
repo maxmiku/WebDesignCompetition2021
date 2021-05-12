@@ -96,8 +96,20 @@ ul, ul li {
 	background-color: darkgreen !important;
 }
 
+.boxEnemyRoute{
+	background-color:#00640055
+}
+
 .boxGoal{
 	background-color: darkblue !important;
+}
+
+.boxMountain{
+	
+	background : no-repeat 50% center;
+	background-image: url(../img/1.jpg);
+	background-color: #fff;
+	background-size : 150% auto;
 }
 
 .overlay {

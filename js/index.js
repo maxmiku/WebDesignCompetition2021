@@ -73,7 +73,8 @@ function initBoard(){
 	bondageBoxEvent();
 	movePlayer(0,0);
 	
-	// setEnemy(0,1);
+	setEnemy(-2,4);
+	setMountain(0,-1);
 	// setEnemy(0,2);
 	// setEnemy(0,-1);
 	// setEnemy(0,-2);
@@ -187,9 +188,16 @@ function setEnemy(x,y){
 	getCell(x,y).addClass('boxEnemy');
 }
 
+//设定目标
 function setGoal(x,y){
 	getCell(x,y).addClass('boxGoal');
 }
+
+//设置自然障碍
+function setMountain(x,y){
+	getCell(x,y).addClass('boxMountain');
+}
+
 
 
 //计算敌人的移动
@@ -197,13 +205,18 @@ function calcEnemiesMove(){
 	enemies=$('.boxEnemy');
 	tpot=getPotFromCell($('.boxPlayer'));
 	// console.log(enemies);
+	$(".boxEnemyRoute").removeClass("boxEnemyRoute");
 	for(let i=0;i<enemies.length;i++){
 		enemy=$(enemies[i]);
 		spot=getPotFromCell(enemy);
-		nextPot=findNearestWay(spot,tpot);
+		let nextPot=findNearestWay(spot,tpot);
+		displayEnemyRoute(nextPot,tpot);
 		console.log(spot,'->',nextPot);
 		enemy.removeClass('boxEnemy');
 		setEnemy(nextPot[0],nextPot[1]);
+
+
+
 		if(nextPot[0]==tpot[0] && nextPot[1]==tpot[1]){
 			alert("游戏结束,你被敌人追上了")
 		}
@@ -248,8 +261,31 @@ function findNearestWay(spot,tpot){
 	return nextPot;
 }
 
+function displayEnemyRoute(spot,tpot){
+	let count = 1;
+	let nextPot=displayEnemyRoute_next(spot,tpot,count);
+	
+	while(nextPot[0]!=tpot[0] || nextPot[1]!=tpot[1]){
+		nextPot=displayEnemyRoute_next(nextPot,tpot,count);
+		count=count+1;
+		console.log(nextPot,count)
+	}
+
+}
 
 
+function displayEnemyRoute_next(spot,tpot,count){
+	nextPot=findNearestWay(spot,tpot);
+	let a = getCell(spot[0],spot[1]);
+	
+	if(!a.hasClass("boxEnemy")){
+		a.find("a").text("R"+count);
+		a.addClass("boxEnemyRoute");
+	}
+	
+	
+	return nextPot;
+}
 
 
 // 右键菜单设置敌人callback
