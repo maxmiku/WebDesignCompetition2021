@@ -198,7 +198,7 @@ ul, ul li {
 .overlay {
 
 	transition : all 250ms ease-in-out 0s ;
-	/* display : none ; */
+	display : none ;
 	position : absolute ;
 	z-index: 20;
 	top: 0;
