@@ -2,8 +2,10 @@
 
 /* 定义棋格大小 */
 :root{
-	--board-cell-heigh: 80;/*格子的理想高度 不需要带单位*/
+	--board-cell-heigh: 100;/*格子的理想高度 不需要带单位*/
 	--board-cell-width: calc(1px*var(--board-cell-heigh)*1.25);
+	--board-cell-border-width: calc(2px*var(--board-cell-heigh)/40);
+	--board-cell-border-color: orange;
 }
 
 
@@ -29,6 +31,9 @@ ul, ul li {
 	/* width : 630px ; */
 	/* margin : auto auto ; */
 	padding-top: calc(0.37px*var(--board-cell-heigh));
+
+	padding-top: 50px;
+	padding-left: 50px;
 }
 .line {
 	/* position : absolute ; */
@@ -53,7 +58,7 @@ ul, ul li {
 
 
 
-.boxF, .boxS, .boxT, .overlay {
+.boxF, .boxS, .boxT, .overlay, .boxSBorder,  .boxFBorder{
 	width : calc(1px*var(--board-cell-heigh));
 	height : var(--board-cell-width);
 	overflow : hidden ;
@@ -75,7 +80,81 @@ ul, ul li {
 	-ms-transform : rotate(-60deg) ;
 	-moz-transform : rotate(-60deg) ;
 	-webkit-transform : rotate(-60deg) ;
+
+	
 }
+
+.boxFBorder{
+	transform : rotate(-60deg) ;
+	-ms-transform : rotate(-60deg) ;
+	-moz-transform : rotate(-60deg) ;
+	-webkit-transform : rotate(-60deg) ;
+	/* box-sizing: content-box; */
+	box-sizing: border-box;
+	margin-left: calc(-1*var(--board-cell-border-width));
+
+	/* margin:-1px; */
+	border-width:0 var(--board-cell-border-width) 0 var(--board-cell-border-width);
+	border-style: solid;
+	border-color: transparent;
+	border-color: transparent;
+	visibility : visible ;
+	pointer-events:none;
+	/* overflow : hidden ; */
+}
+
+
+
+.boxSBorder{
+	transform : rotate(-60deg) ;
+	-ms-transform : rotate(-60deg) ;
+	-moz-transform : rotate(-60deg) ;
+	-webkit-transform : rotate(-60deg) ;
+	/* box-sizing: content-box; */
+	box-sizing: border-box;
+	margin-left: calc(-1*var(--board-cell-border-width));
+	/* margin-right: -1px; */
+	border-width:0 var(--board-cell-border-width) 0 var(--board-cell-border-width);
+	border-style: solid;
+	/* border-color: blue; */
+	visibility : visible ;
+	border-color: transparent;
+	pointer-events:none;
+	/* overflow : hidden ; */
+	position: relative;
+}
+
+.boxTBorder{
+	box-sizing: border-box;
+	border-width:0px var(--board-cell-border-width) 0px var(--board-cell-border-width);
+	border-style: solid;
+	border-color: transparent;
+	pointer-events:none;
+
+	/* border-color: transparent; */
+}
+
+.LTBorder .boxFBorder{
+	border-right-color: var(--board-cell-border-color);
+}
+.RBBorder .boxFBorder{
+	border-left-color: var(--board-cell-border-color);
+}
+
+.RTBorder .boxSBorder{
+	border-right-color: var(--board-cell-border-color);
+}
+.LBBorder .boxSBorder{
+	border-left-color: var(--board-cell-border-color);
+}
+
+.RBorder .boxTBorder{
+	border-right-color: var(--board-cell-border-color);
+}
+.LBorder .boxTBorder{
+	border-left-color: var(--board-cell-border-color);
+}
+
 .boxT {
 	transform : rotate(-60deg) ;
 	background : no-repeat 50% center ;
@@ -86,6 +165,10 @@ ul, ul li {
 	visibility : visible ;
 	background-color: #fff;
 	transition: 0.5s;
+
+	position: relative;
+	
+	
 }
 
 .boxPlayer{
@@ -113,9 +196,12 @@ ul, ul li {
 }
 
 .overlay {
+
 	transition : all 250ms ease-in-out 0s ;
-	display : none ;
-	position : relative ;
+	/* display : none ; */
+	position : absolute ;
+	z-index: 20;
+	top: 0;
 }
 .overlay:hover {
 	background-color : rgba(0,0,0,0.6) ;

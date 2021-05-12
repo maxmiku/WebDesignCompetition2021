@@ -307,7 +307,7 @@ function callback_initBoardButton(){
 
 
 $(function(){
-	initBoard()
+	// initBoard()
 })
 
 
