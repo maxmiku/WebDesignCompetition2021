@@ -171,11 +171,25 @@ ul, ul li {
 }
 
 .boxPlayer{
-	background-color: darkorange !important;
+	/* background-color: darkorange !important; */
+	background : no-repeat 50% center;
+	background-image: url(../img/player.png);
+	background-color: #fff;
+	background-size : 160% auto;
 }
 
+.boxPlayerCanWalk{
+	background-color: #bbbb !important;
+
+}
+
+
 .boxEnemy{
-	background-color: darkgreen !important;
+	/* background-color: darkgreen !important; */
+	background : no-repeat 50% center;
+	background-image: url(../img/enemy.png);
+	background-color: #fff;
+	background-size : 180% auto;
 }
 
 .boxEnemyRoute{
@@ -183,15 +197,19 @@ ul, ul li {
 }
 
 .boxGoal{
-	background-color: darkblue !important;
+	/* background-color: darkblue !important; */
+	background : no-repeat 50% center;
+	background-image: url(../img/goal.png);
+	background-color: #fff;
+	background-size : 90% auto;
 }
 
 .boxMountain{
 	
 	background : no-repeat 50% center;
-	background-image: url(../img/1.jpg);
+	background-image: url(../img/mountain.png);
 	background-color: #fff;
-	background-size : 150% auto;
+	background-size : 155% auto;
 }
 
 .overlay {
@@ -226,4 +244,8 @@ ul, ul li {
 	font-size : 18px ;
 	font-weight : bolder ;
 	transform: scale(calc(var(--board-cell-heigh)/200));
+}
+
+.boxPlayer .overlay a{
+	content: "玩家";
 }
